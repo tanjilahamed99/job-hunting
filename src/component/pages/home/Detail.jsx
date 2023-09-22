@@ -3,6 +3,9 @@ import { SlLocationPin } from "react-icons/sl";
 import { MdAttachMoney } from "react-icons/md";
 import { BsTelephoneFill } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { setLocalStorage } from "../../row_JavaScript/localStorage";
 
 const Detail = () => {
     const { id } = useParams();
@@ -10,7 +13,9 @@ const Detail = () => {
     const jobs = useLoaderData()
     const jobDetail = jobs.find((job) => job.id === idInt)
     const { job_description, job_responsibility, educational_requirements, experiences, salary, job_title, contact_information } = jobDetail
-    console.log(jobDetail)
+    // console.log(jobDetail)
+    const notify = () => toast("Apply complete");
+
     return (
         <div className="flex container mx-auto gap-10 my-24">
             <div className="w-[70%] space-y-6">
@@ -32,8 +37,9 @@ const Detail = () => {
                 <h2 className=" text-[#1A1919] font-extrabold flex items-center gap-1"><BsTelephoneFill></BsTelephoneFill>Phone:<span className="text-[#757575]">{contact_information.phone}</span></h2>
                 <h2 className=" text-[#1A1919] font-extrabold my-3 flex items-center gap-1 "><MdEmail></MdEmail> Email: <span className="text-[#757575]">{contact_information.email}</span></h2>
                 <h2 className=" text-[#1A1919] font-extrabold flex items-center gap-1"><SlLocationPin className="text-3xl"></SlLocationPin> <h2>Address: <span className="text-[#757575]">{contact_information.address}</span></h2></h2>
-                <Link className="w-ful text-center"><button className='btn bg-gradient-to-r  mt-3 from-[#7E90FE] to-[#9873FF] text-white'>View Details</button></Link>
+                <Link onClick={()=>setLocalStorage(idInt)} className="w-ful text-center"><button onClick={notify}  className='btn bg-gradient-to-r  mt-3 from-[#7E90FE] to-[#9873FF] text-white'>Apply Now</button></Link>
             </div>
+            <ToastContainer position="top-center"/>
         </div>
     );
 };

@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import MainUi from './MainUi'
 import Home from './component/pages/home/Home'
 import Detail from './component/pages/home/Detail'
+import Applied from './component/pages/applied_jobs/Applied'
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/applied',
-        element: <div>this is applied job </div>
+        element: <Applied></Applied>,
+        loader:()=>fetch('../jobs.json')
       },
     ]
   }
